@@ -36,7 +36,7 @@ export default class WebappManifestPlugin {
   compilationHook() {
     const config = this.config;
     return function hook(compilation) {
-      const crossOrigin = { config } || false;
+      const { crossOrigin } = config || false;
 
       compilation.plugin(HTML_PLUGIN_BEFORE_PROCESS, (htmlData, callback) => {
         let publicPath = this.options.output.publicPath;
