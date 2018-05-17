@@ -36,12 +36,14 @@ export default class WebappManifestPlugin {
   compilationHook() {
     const config = this.config;
     return function hook(compilation) {
+      const crossOrigin = { config } || false;
+
       compilation.plugin(HTML_PLUGIN_BEFORE_PROCESS, (htmlData, callback) => {
         let publicPath = this.options.output.publicPath;
         if (publicPath.length > 0 && publicPath[publicPath.length - 1] !== '/') {
           publicPath += '/';
         }
-        htmlData.html = htmlData.html.replace('</head>', `  <link rel="manifest" href="${publicPath}manifest.json">\n</head>`);
+        htmlData.html = htmlData.html.replace('</head>', `  <link rel="manifest" href="${publicPath}manifest.json" ${crossOrigin ? `crossorigin="${crossOrigin}"` : ''}>\n</head>`);
         // we want to inject our manifest into the head
         callback(null, htmlData);
       });

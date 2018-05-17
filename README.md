@@ -49,7 +49,8 @@ const config = {
   icons: [],
   preferRelatedApplications: false,
   relatedApplications: [],
-  scope: '/'
+  scope: '/',
+  crossOrigin: false, // Possible values: [`anonymous`, `use-credentials`, false]
 }
 ```
 
